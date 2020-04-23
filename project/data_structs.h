@@ -10,12 +10,12 @@ typedef struct pqNode{
 
 
 
-pqNode* newPQ_node(double priority, node_t *node); 
+pqNode* newPQ_node(double, node_t*); 
 
-void pq_push(pqNode** start, pqNode *curr_node);
+void pq_push(pqNode**, pqNode *);
 
-bool isEmpty(pqNode** start); 
+bool isEmpty(pqNode** ); 
 
-pqNode* pop(pqNode** start); 
+pqNode* pop(pqNode** ); 
 
 

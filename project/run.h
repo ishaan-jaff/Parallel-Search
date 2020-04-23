@@ -1,3 +1,6 @@
+#ifndef RUN_H
+#define RUN_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -23,6 +26,10 @@ typedef struct {
     int x;
     int y;
 
+    int t_id;
+    int time; 
+    bool visited;
+
     
 } node_t;
 
@@ -41,3 +48,4 @@ typedef struct {
 
 } graph_t;
 
+#endif
