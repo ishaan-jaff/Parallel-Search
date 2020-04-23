@@ -47,37 +47,44 @@ bool a_star(graph_t* graph){
 }
 
 
-bool depth_first_search(graph_t* graph, int row, int col){
-    
-    printf("row=%d, col=%d\n", row, col);
-    if(row<0 || col <0 || row >= graph->height || col >= graph->width)
-        return false; 
-    
-    // visited this node before, do not need to further search 
-    if(graph->nodes[row][col]->type=='V')
-        return false;
-    
-    if(graph->nodes[row][col]->type=='E')
-        return true;
-    
-    // if not visited mark as visited 
-    graph->nodes[row][col]->type = 'V';
-
-    // right 
-    if(depth_first_search(graph, row, col+1))
-        return true;
-    
-    // down
-    if(depth_first_search(graph, row+1, col))
-        return true;
-    
-    // left 
-    if(depth_first_search(graph, row, col-1))
-        return true;
-    
-    // up 
-    if(depth_first_search(graph, row-1, col))
-        return true;
-    
-    return false; 
+bool sequential_dfs(graph_t* graph, int rows, int cols){
+  //nature of dfs tells us the max number of traversals will be col+1
+  //traverse graph vertically at most col times+1 for the first horizontal traversal
+  int max_iter = cols+1;
+  int curr_col = cols-1;
+  node_t ***nodes = graph->nodes;
+  for(int count = 0; count <= max_iter; count++){
+    if(count == 0){
+      for(int c=0; c<cols; c++){
+        if(nodes[0][c]->type == 'E')
+          return true;
+        if(nodes[0][c]->type != 'S')
+          graph->nodes[0][c]->type = 'V';
+      }
+    }
+    else if(count%2==1){ //traverse down
+      for(int r=1;r<rows;r++){
+        if(nodes[r][curr_col]->type == 'E'){
+          return true;
+        }
+        if(nodes[r][curr_col]->type != 'E')
+          nodes[r][curr_col]->type = 'V';
+      }
+      curr_col--;
+    }
+    else{ //traverse up
+      for(int r=rows-1; r>0; r--){
+        if(nodes[r][curr_col]->type == 'E'){
+          return true;
+        }
+        if(nodes[r][curr_col]->type != 'E')
+          nodes[r][curr_col]->type = 'V';
+      }
+      curr_col--;
+    }
+  }
+  graph->nodes = nodes;
+  return false;
 }
+    
+ 
