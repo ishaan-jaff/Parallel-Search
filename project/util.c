@@ -34,7 +34,6 @@ void visualize_graph(graph_t* graph){
                     printf("%d", t);
                 }
             }
-
         }
     }
     printf("\n\n\n");
@@ -86,3 +85,23 @@ graph_t* init_search_space(int width, int height, int *start, int *end){
     return graph; 
 }
 
+
+
+void start_search(int width, int height, int *start, int *end, search_type_t search_type){
+    printf("Start Search\n");
+    switch(search_type) {
+    graph_t *graph = init_search_space(width, height, start, end);
+    //printf("Depth First Search\n");
+    //if(depth_first_search(graph, graph->start_node[0], graph->start_node[1]))
+    //printf("Found\n");
+    //printf("A* Search\n");
+    //a_star(graph);
+    //printf("parallel A*\n");
+    //parallel_a_star(graph);
+
+    //breadth_first_search(graph);
+    parallel_breadth_first_search(graph);
+    
+    //visualize_graph(graph);
+
+}
