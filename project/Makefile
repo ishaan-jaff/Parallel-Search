@@ -2,11 +2,9 @@ CC=gcc
 OMP=-fopenmp -DOMP
 CFLAGS=-g -O3 -Wall -std=gnu99
 
-CFILES = run.c cycletimer.c seq-search.c
-HFILES = data_structs.h run.h cycletimer.h seq-search.h
+CFILES =  cycletimer.c seq-search.c par-search.c main.c util.c data_structs.c
+HFILES = data_structs.h cycletimer.h seq-search.h util.h par-search.h cycletimer.h
 
-dfs-seq: seq-search.c cycletimer.c
-	$(CC) $(CFLAGS) -o dfs-seq $(CFILES) $(LDFLAGS)
-  
-dfs-par: run.c cycletimer.c
-	$(CC) $(CFLAGS) -o dfs-par $(CFILES) $(LDFLAGS)
+all: main.c cycletimer.c
+	$(CC) $(CFLAGS) -o output $(CFILES) $(LDFLAGS)
+

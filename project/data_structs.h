@@ -1,21 +1,21 @@
-
+#ifndef DATA_STRUCTS_H
+#include "util.h"
 
 typedef struct pqNode{
-    // for priority queue used 
+    // for priority queue used
     double priority;
-    node_t* node; 
+    node_t* node;
     struct pqNode *next;
-  
+
 } pqNode;
 
+pqNode* newPQ_node(double priority, node_t *node);
 
+void pq_push(pqNode **start, pqNode *curr_node);
 
-pqNode* newPQ_node(double, node_t*); 
+bool isEmpty(pqNode **start);
 
-void pq_push(pqNode**, pqNode *);
+pqNode* pop(pqNode **start);
 
-bool isEmpty(pqNode** ); 
-
-pqNode* pop(pqNode** ); 
-
-
+#define DATA_STRUCTS_H
+#endif
