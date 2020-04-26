@@ -9,6 +9,12 @@ typedef struct pqNode{
 
 } pqNode;
 
+typedef struct pqNode1{
+    // for priority queue used
+    double priority;
+    node_t* node;
+} pqNode1;
+
 pqNode* newPQ_node(double priority, node_t *node);
 
 void pq_push(pqNode **start, pqNode *curr_node);
