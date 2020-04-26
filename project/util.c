@@ -124,12 +124,12 @@ graph_t* init_search_space(int width, int height, int *start, int *end){
 }
 
 pqNode1** init_a_queue(graph_t* graph){
-  int head = 0; 
-  pqNode1** a_queue = malloc(sizeof(pqNode1*)*graph->height*graph->width); 
+  int head = 0;
+  pqNode1** a_queue = malloc(sizeof(pqNode1*)*graph->height*graph->width);
   for(int i = 0; i<graph->height; i++){
     for(int j =0; j<graph->width; j++){
       a_queue[head] = malloc(sizeof(pqNode1));
-      //a_queue[head]->priority = 0.0; 
+      //a_queue[head]->priority = 0.0;
     }
   }
   return a_queue;
@@ -140,7 +140,7 @@ pqNode1** init_a_queue(graph_t* graph){
 node_t*** init_frontiers(graph_t* graph){
   int num_threads = 12;
   node_t*** all_frontiers = malloc(num_threads*sizeof(int*));
-  for(int i=0; i<num_threads; i++){ 
+  for(int i=0; i<num_threads; i++){
     all_frontiers[i] = malloc(sizeof(node_t*)*graph->width*graph->height);
   }
   return all_frontiers;
@@ -152,13 +152,9 @@ node_t*** init_frontiers(graph_t* graph){
 void start_search(int width, int height, int *start, int *end, search_type_t search_type){
   printf("Start Search\n");
   double time_taken;
-<<<<<<< HEAD
   graph_t *graph = init_search_space(width, height, start, end);
   graph_t *graph2 = init_search_space(width, height, start, end);
   graph_t *graph3 = init_search_space(width, height, start, end);
-=======
-  
->>>>>>> 08588f2bcb57453600e2a16c470035392e7cf602
   switch(search_type) {
     case BFS_SEQ:
     {
@@ -174,7 +170,7 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
     case BFS_PAR:
     {
       graph_t *graph = init_search_space(width, height, start, end);
-      node_t*** all_frontiers = init_frontiers(graph); 
+      node_t*** all_frontiers = init_frontiers(graph);
       printf("PARALLEL BREADTH FIRST SEARCH\n");
       time_taken = currentSeconds();
       parallel_breadth_first_search(graph, all_frontiers);
@@ -189,7 +185,6 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
       printf("SEQUENTIAL DEPTH FIRST SEARCH\n");
       printf("Width = %d, Height = %d\n", width, height);
       printf("Start = (%d,%d), End = (%d,%d)\n", start[0], start[1], end[0], end[1]);
-      graph_t *graph = init_search_space(width, height, start, end);
       time_taken = currentSeconds();
       seq_dfs(graph, graph->start_node[0], graph->start_node[0]);
       time_taken = currentSeconds() - time_taken;
@@ -201,10 +196,6 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
       time_taken = currentSeconds() - time_taken;
       printf("Run 2 Time: %f\n", time_taken);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 08588f2bcb57453600e2a16c470035392e7cf602
       graph = init_search_space(width, height, start, end);
       time_taken = currentSeconds();
       seq_dfs(graph3, graph->start_node[0], graph->start_node[0]);

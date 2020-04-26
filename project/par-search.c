@@ -22,7 +22,7 @@ void visualize_graph(graph_t* graph);
 
 
 int* parallel_a_star_step(graph_t* graph, pqNode* startPQ, int* step_info, int num_nodes){
-    int new_num_nodes = num_nodes; 
+    int new_num_nodes = num_nodes;
     node_t* end = graph->end;
     printf("num of nodes=%d\n", num_nodes);
     for(int i = 0; i<num_nodes; i++){
@@ -30,9 +30,9 @@ int* parallel_a_star_step(graph_t* graph, pqNode* startPQ, int* step_info, int n
         new_num_nodes--;
         if(current->type=='E'){
             printf("Found at =%d, %d\n", current->x, current->y);
-            step_info[1] = 1; 
-            step_info[0] = new_num_nodes; 
-            return step_info; 
+            step_info[1] = 1;
+            step_info[0] = new_num_nodes;
+            return step_info;
         }
 
         //printf("curr node=%d,%d\n", current->x, current->y);
@@ -58,15 +58,15 @@ int* parallel_a_star_step(graph_t* graph, pqNode* startPQ, int* step_info, int n
             new_num_nodes++;
         }
     }
-    step_info[0] = new_num_nodes; 
-    return step_info; 
+    step_info[0] = new_num_nodes;
+    return step_info;
 }
 bool parallel_a_star(graph_t* graph){
     node_t* start = graph->start;
     pqNode* startPQ = newPQ_node(0.0, start);
-    int num_nodes = 1; 
+    int num_nodes = 1;
     int step_info[3] = {0,0,0};
-    bool found = 0; 
+    bool found = 0;
     while(startPQ != NULL && !found){
         parallel_a_star_step(graph, startPQ, step_info, num_nodes);
         num_nodes = step_info[0];
@@ -81,7 +81,7 @@ bool parallel_a_star(graph_t* graph){
 int* parallel_bfs_step(graph_t* graph, node_t** frontier, int head, int tail, int* head_tail, node_t*** all_frontiers){
     int new_tail = tail;
     int found = 0;
-
+    int total = tail-head;
     // Expand nodes on the frontier in parallel
     // each thread given some amount of nodes from the frontier
     // after it adds nodes to its own frontier, it is copied to the shared frontier
@@ -107,14 +107,14 @@ int* parallel_bfs_step(graph_t* graph, node_t** frontier, int head, int tail, in
             if(idx > tail)
                 continue;
             node_t* current = frontier[pos];
-     
+
             //head++;
             if(current->type=='E'){
                 printf("Found at=%d,%d\n", current->x, current->y);
                 found=1;
                 continue;
             }
-       
+
             int neighbor_positions [8][2] = {{0,1},{1,0},{0,-1},{-1,0},
                                             {1,1}, {1,-1}, {-1,1}, {-1,-1}};
             for(int i=0; i<8; i++){
@@ -134,10 +134,10 @@ int* parallel_bfs_step(graph_t* graph, node_t** frontier, int head, int tail, in
 
                 #pragma omp critical
                 {
-                    neighbor_node->visited = 1; 
-                    
+                    neighbor_node->visited = 1;
+
                 }
-                
+
             }
         }
         #pragma omp critical
@@ -145,7 +145,7 @@ int* parallel_bfs_step(graph_t* graph, node_t** frontier, int head, int tail, in
             memcpy(&frontier[new_tail], new_expanded_nodes, (index+1)*sizeof(node_t*));
             new_tail += index;
         }
-        
+
     }
     #endif
     //printf("new head=%d, new tail=%d\n", tail, new_tail);
@@ -187,10 +187,10 @@ bool parallel_dfs(graph_t* graph, int rows, int cols){
   int max_iter = cols+1;
   int curr_col = cols-1;
   node_t ***nodes = graph->nodes;
+  for(int count = 0; count <= max_iter; count++){
   #if OMP
   #pragma omp parallel num_threads(1)
   #endif
-  for(int count = 0; count <= max_iter; count++){
     if(count == 0){
       #if OMP
       #pragma omp parallel for
