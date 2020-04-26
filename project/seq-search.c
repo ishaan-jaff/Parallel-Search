@@ -11,7 +11,6 @@ bool isEmpty(pqNode **start);
 pqNode* pop(pqNode **start);
 
 bool a_star(graph_t* graph){
-    double startTime = currentSeconds();
     node_t* start = graph->start;
     node_t* end = graph->end;
     pqNode* startPQ = newPQ_node(0.0, start);
@@ -19,12 +18,11 @@ bool a_star(graph_t* graph){
     while(startPQ != NULL){
         node_t* current = pop(&startPQ)->node;
         if(current->type=='E'){
-            double endTime = currentSeconds();
-            printf("Time take = %f", endTime - startTime);
+            printf("Found at =%d, %d\n", current->x, current->y);
             return true;
         }
 
-        printf("curr node=%d,%d\n", current->x, current->y);
+        //printf("curr node=%d,%d\n", current->x, current->y);
         current->type = 'V';
         int neighbor_positions [8][2] = {{0,1},{1,0},{0,-1},{-1,0},
                                         {1,1}, {1,-1}, {-1,1}, {-1,-1}};
@@ -46,8 +44,6 @@ bool a_star(graph_t* graph){
             pq_push(&startPQ, temp);
         }
     }
-    double endTime = currentSeconds();
-    printf("Time take = %f", endTime - startTime);
     return false;
 }
 
@@ -83,6 +79,48 @@ bool seq_dfs(graph_t* graph, int row, int col){
     if(seq_dfs(graph, row, col-1))
         return true;
 
+    return false;
+}
+
+
+bool seq_breadth_first_search(graph_t* graph){
+    node_t* start = graph->start; 
+    node_t ** frontier = malloc(sizeof(node_t*)*graph->width*graph->height);
+    int head = 0;
+    int tail = 0; 
+    frontier[0] = start;
+    tail++; 
+
+    while(head!=tail){
+        for(int idx = head; idx<tail; idx++){
+            node_t* current = frontier[idx];
+            head++;
+            if(current->type=='E'){
+                printf("Found at=%d,%d\n", current->x, current->y);
+                return true;
+            }
+            int neighbor_positions [8][2] = {{0,1},{1,0},{0,-1},{-1,0},
+                                            {1,1}, {1,-1}, {-1,1}, {-1,-1}};
+            for(int i=0; i<8; i++){
+                
+                int neighbor_x = current->x + neighbor_positions[i][0];
+                int neighbor_y = current->y + neighbor_positions[i][1];
+                if(neighbor_x < 0 || neighbor_y < 0 || neighbor_x >= graph->height || neighbor_y >= graph->width)
+                    continue; 
+                
+                node_t* neighbor_node = graph->nodes[neighbor_x][neighbor_y];
+                if(neighbor_node->type!='V'){
+                    if(neighbor_node->type!='E' && neighbor_node->type!='S'){
+                        neighbor_node->type = 'V';
+                        neighbor_node->time = current->time + 1;
+                    }
+                    frontier[tail] = neighbor_node;
+                    tail++; 
+                }
+            }
+        }
+
+    }
     return false;
 }
 

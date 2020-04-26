@@ -51,6 +51,8 @@ typedef enum {
   BFS_PAR,
   DFS_SEQ,
   DFS_PAR,
+  A_SEQ,
+  A_PAR,
 } search_type_t;
 
 //initializes a graph to search
