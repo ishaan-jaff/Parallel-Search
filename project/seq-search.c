@@ -49,7 +49,7 @@ bool a_star(graph_t* graph){
 
 bool seq_dfs(graph_t* graph, int row, int col){
 
-    printf("row=%d, col=%d\n", row, col);
+    //printf("row=%d, col=%d\n", row, col);
     if(row<0 || col <0 || row >= graph->height || col >= graph->width)
         return false;
 
@@ -71,12 +71,12 @@ bool seq_dfs(graph_t* graph, int row, int col){
     if(seq_dfs(graph, row+1, col))
         return true;
 
-    // left
-    if(seq_dfs(graph, row, col-1))
-        return true;
-
     // up
     if(seq_dfs(graph, row-1, col))
+        return true;
+
+    // left
+    if(seq_dfs(graph, row, col-1))
         return true;
 
     return false;

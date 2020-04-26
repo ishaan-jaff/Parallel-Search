@@ -188,7 +188,7 @@ bool parallel_dfs(graph_t* graph, int rows, int cols){
   int curr_col = cols-1;
   node_t ***nodes = graph->nodes;
   #if OMP
-  #pragma omp parallel num_threads(6)
+  #pragma omp parallel num_threads(1)
   #endif
   for(int count = 0; count <= max_iter; count++){
     if(count == 0){
