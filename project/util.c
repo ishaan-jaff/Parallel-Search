@@ -29,23 +29,23 @@ void visualize_graph(graph_t* graph){
   printf("%d %d\n", graph->height, graph->width);
   for(int i = 0; i<graph->height; i++){
     for(int j = 0; j<graph->width; j++){
-      int t = graph->nodes[i][j]->time;
+      int t = graph->nodes[i][j]->type;
       if(graph->nodes[i][j]==NULL)
         printf("NULL\n");
       if(j==graph->width-1){
         if(t<10){
-          printf("0%d\n", t);
+          printf("%c\n", t);
         }
         else{
-          printf("%d\n", t);
+          printf("%c\n", t);
         }
       }
       else{
         if(t<10){
-          printf("0%d", t);
+          printf("%c", t);
         }
         else{
-          printf("%d", t);
+          printf("%c", t);
         }
       }
     }
@@ -104,6 +104,8 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
   printf("Start Search\n");
   double time_taken;
   graph_t *graph = init_search_space(width, height, start, end);
+  graph_t *graph2 = init_search_space(width, height, start, end);
+  graph_t *graph3 = init_search_space(width, height, start, end);
   switch(search_type) {
     case BFS_SEQ:
     {
@@ -126,17 +128,18 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
       printf("Start = (%d,%d), End = (%d,%d)\n", start[0], start[1], end[0], end[1]);
 
       time_taken = currentSeconds();
-      seq_dfs(graph, height, width);
+      seq_dfs(graph, graph->start_node[0], graph->start_node[0]);
       time_taken = currentSeconds() - time_taken;
       printf("Run 1 Time: %f\n", time_taken);
 
       time_taken = currentSeconds();
-      seq_dfs(graph, height, width);
+      seq_dfs(graph2, graph->start_node[0], graph->start_node[0]);
       time_taken = currentSeconds() - time_taken;
       printf("Run 2 Time: %f\n", time_taken);
 
+      graph = init_search_space(width, height, start, end);
       time_taken = currentSeconds();
-      seq_dfs(graph, height, width);
+      seq_dfs(graph3, graph->start_node[0], graph->start_node[0]);
       time_taken = currentSeconds() - time_taken;
       printf("Run 3 Time: %f\n", time_taken);
       break;
