@@ -55,6 +55,12 @@ typedef enum {
   A_PAR,
 } search_type_t;
 
+typedef enum {
+  UP,
+  DOWN,
+  HORIZ,
+} dir_t;
+
 //initializes a graph to search
 graph_t* init_search_space(int width, int height, int *start, int *end);
 

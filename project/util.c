@@ -35,18 +35,23 @@ void visualize_graph(graph_t* graph){
         printf("NULL\n");
       if(j==graph->width-1){
         if(t<10){
-          printf("%c\n", t);
+          if(t == 'V') printf("\033[0;32mV\n\033[0m");
+          else printf("%c\n", t);
         }
         else{
-          printf("%c\n", t);
+          if(t == 'V') printf("\033[0;32mV\n\033[0m");
+          else printf("%c\n", t);
         }
       }
       else{
         if(t<10){
+          if(t == 'V') printf("\033[0;32mV\033[0m");
+          else printf("%c", t);
           printf("%c", t);
         }
         else{
-          printf("%c", t);
+          if(t == 'V') printf("\033[0;32mV\033[0m");
+          else printf("%c", t);
         }
       }
     }
@@ -80,7 +85,7 @@ void visualize_graph_node_types(graph_t* graph){
   return;
 }
 graph_t* init_search_space(int width, int height, int *start, int *end){
-  printf("Start Init\n");
+  //printf("Start Init\n");
   graph_t *graph = malloc(sizeof(graph_t));
   graph->nodes = malloc(height * sizeof(node_t***));
   for(int i =0; i<height; i++){
@@ -118,9 +123,23 @@ graph_t* init_search_space(int width, int height, int *start, int *end){
   graph->start_node = start;
   graph->end_node = end;
 
-  printf("%d %d\n", graph->height, graph->width);
+  //printf("%d %d\n", graph->height, graph->width);
   //visualize_graph(graph);
   return graph;
+}
+
+void free_graph(graph_t *graph, int width, int height){
+  for(int i=0; i < height; i++){
+    for(int j=0; j < width; j++){
+      free(graph->nodes[i][j]);
+    }
+  }
+  for(int k=0; k< height; k++){
+    free(graph->nodes[k]);
+  }
+  free(graph->nodes);
+  free(graph);
+  return;
 }
 
 pqNode1** init_a_queue(graph_t* graph){
@@ -152,9 +171,8 @@ node_t*** init_frontiers(graph_t* graph){
 void start_search(int width, int height, int *start, int *end, search_type_t search_type){
   printf("Start Search\n");
   double time_taken;
-  graph_t *graph = init_search_space(width, height, start, end);
-  graph_t *graph2 = init_search_space(width, height, start, end);
-  graph_t *graph3 = init_search_space(width, height, start, end);
+  //graph_t *graph2 = init_search_space(width, height, start, end);
+  //graph_t *graph3 = init_search_space(width, height, start, end);
   switch(search_type) {
     case BFS_SEQ:
     {
@@ -185,21 +203,32 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
       printf("SEQUENTIAL DEPTH FIRST SEARCH\n");
       printf("Width = %d, Height = %d\n", width, height);
       printf("Start = (%d,%d), End = (%d,%d)\n", start[0], start[1], end[0], end[1]);
+
+      graph_t *graph = init_search_space(width, height, start, end);
+      //visualize_graph(graph);
       time_taken = currentSeconds();
-      seq_dfs(graph, graph->start_node[0], graph->start_node[0]);
+      seq_dfs(graph, height, width);
+      //visualize_graph(graph);
       time_taken = currentSeconds() - time_taken;
-      printf("Run 1 Time: %f\n", time_taken);
+      free_graph(graph, width, height);
+      printf("Run 1 Time: %f\t", time_taken);
 
       graph = init_search_space(width, height, start, end);
+      //visualize_graph(graph);
       time_taken = currentSeconds();
-      seq_dfs(graph2, graph->start_node[0], graph->start_node[0]);
+      seq_dfs(graph, height, width);
+      //visualize_graph(graph);
       time_taken = currentSeconds() - time_taken;
-      printf("Run 2 Time: %f\n", time_taken);
+      free_graph(graph, width, height);
+      printf("Run 2 Time: %f\t", time_taken);
 
       graph = init_search_space(width, height, start, end);
+      //visualize_graph(graph);
       time_taken = currentSeconds();
-      seq_dfs(graph3, graph->start_node[0], graph->start_node[0]);
+      seq_dfs(graph, height, width);
+      //visualize_graph(graph);
       time_taken = currentSeconds() - time_taken;
+      free_graph(graph, width, height);
       printf("Run 3 Time: %f\n", time_taken);
       break;
     }
@@ -213,19 +242,22 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
       time_taken = currentSeconds();
       parallel_dfs(graph, height, width);
       time_taken = currentSeconds() - time_taken;
-      printf("Run 1 Time: %f\n", time_taken);
+      free_graph(graph, width, height);
+      printf("Run 1 Time: %f\t", time_taken);
 
 
       graph = init_search_space(width, height, start, end);
       time_taken = currentSeconds();
       parallel_dfs(graph, height, width);
       time_taken = currentSeconds() - time_taken;
-      printf("Run 2 Time: %f\n", time_taken);
+      free_graph(graph, width, height);
+      printf("Run 2 Time: %f\t", time_taken);
 
       graph = init_search_space(width, height, start, end);
       time_taken = currentSeconds();
       parallel_dfs(graph, height, width);
       time_taken = currentSeconds() - time_taken;
+      free_graph(graph, width, height);
       printf("Run 3 Time: %f\n", time_taken);
       break;
     }

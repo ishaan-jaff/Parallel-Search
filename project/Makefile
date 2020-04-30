@@ -8,5 +8,3 @@ HFILES = data_structs.h cycletimer.h seq-search.h util.h par-search.h cycletimer
 all: main.c cycletimer.c
 	$(CC) $(CFLAGS) -o output $(CFILES) $(LDFLAGS) $(OMP)
 
-dfs: main.c cycletimer.c
-	$(CC) $(CFLAGS) -o output $(CFILES) $(LDFLAGS) 

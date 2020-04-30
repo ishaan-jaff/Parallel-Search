@@ -46,7 +46,7 @@ bool a_star(graph_t* graph){
     }
     return false;
 }
-
+/*
 bool seq_dfs(graph_t* graph, int row, int col){
 
     //printf("row=%d, col=%d\n", row, col);
@@ -81,15 +81,58 @@ bool seq_dfs(graph_t* graph, int row, int col){
 
     return false;
 }
+*/
 
+bool seq_dfs(graph_t* graph, int rows, int cols){
+  //nature of dfs tells us the max number of traversals will be col+1
+  //traverse graph vertically at most col times+1 for the first horizontal traversal
+  int max_iter = cols+1;
+  int curr_col = cols-1;
+  for(int count = 0; count <= max_iter; count++){
+    if(count == 0){
+      for(int c=0; c<cols; c++){
+        visualize_graph(graph);
+        if(graph->nodes[0][c]->type == 'E')
+          return true;
+        if(graph->nodes[0][c]->type != 'S' && graph->nodes[0][c]->type != 'V')
+          graph->nodes[0][c]->type = 'V';
+      }
+    }
+    else if(count%2==1){ //traverse down
+      for(int r=1;r<rows;r++){
+        visualize_graph(graph);
+      //  visualize_graph(graph);
+        if(graph->nodes[r][curr_col]->type == 'E'){
+          return true;
+        }
+        if(graph->nodes[r][curr_col]->type != 'E' && graph->nodes[r][curr_col]->type != 'V')
+          graph->nodes[r][curr_col]->type = 'V';
+      }
+      curr_col--;
+    }
+    else{ //traverse up
+      for(int r=rows-1; r>0; r--){
+        visualize_graph(graph);
+     //   visualize_graph(graph);
+        if(graph->nodes[r][curr_col]->type == 'E'){
+          return true;
+        }
+        if(graph->nodes[r][curr_col]->type != 'E' && graph->nodes[r][curr_col]->type != 'V')
+          graph->nodes[r][curr_col]->type = 'V';
+      }
+      curr_col--;
+    }
+  }
+  return false;
+}
 
 bool seq_breadth_first_search(graph_t* graph){
-    node_t* start = graph->start; 
+    node_t* start = graph->start;
     node_t ** frontier = malloc(sizeof(node_t*)*graph->width*graph->height);
     int head = 0;
-    int tail = 0; 
+    int tail = 0;
     frontier[0] = start;
-    tail++; 
+    tail++;
 
     while(head!=tail){
         for(int idx = head; idx<tail; idx++){
@@ -102,12 +145,12 @@ bool seq_breadth_first_search(graph_t* graph){
             int neighbor_positions [8][2] = {{0,1},{1,0},{0,-1},{-1,0},
                                             {1,1}, {1,-1}, {-1,1}, {-1,-1}};
             for(int i=0; i<8; i++){
-                
+
                 int neighbor_x = current->x + neighbor_positions[i][0];
                 int neighbor_y = current->y + neighbor_positions[i][1];
                 if(neighbor_x < 0 || neighbor_y < 0 || neighbor_x >= graph->height || neighbor_y >= graph->width)
-                    continue; 
-                
+                    continue;
+
                 node_t* neighbor_node = graph->nodes[neighbor_x][neighbor_y];
                 if(neighbor_node->type!='V'){
                     if(neighbor_node->type!='E' && neighbor_node->type!='S'){
@@ -115,7 +158,7 @@ bool seq_breadth_first_search(graph_t* graph){
                         neighbor_node->time = current->time + 1;
                     }
                     frontier[tail] = neighbor_node;
-                    tail++; 
+                    tail++;
                 }
             }
         }
