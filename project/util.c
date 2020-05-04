@@ -245,7 +245,6 @@ void start_search(int width, int height, int *start, int *end, search_type_t sea
       free_graph(graph, width, height);
       printf("Run 1 Time: %f\t", time_taken);
 
-
       graph = init_search_space(width, height, start, end);
       time_taken = currentSeconds();
       parallel_dfs(graph, height, width);

@@ -234,7 +234,7 @@ bool parallel_dfs(graph_t* graph, int rows, int cols){
 }
 
 */
-
+/*
 bool dfs_helper(graph_t* graph, int rows, int cols, int start_col, int tid){
   //nature of dfs tells us the max number of traversals will be col+1
   //traverse graph vertically at most col times+1 for the first horizontal traversal
@@ -246,8 +246,10 @@ bool dfs_helper(graph_t* graph, int rows, int cols, int start_col, int tid){
         //if(tid == 1) visualize_graph(graph);
         if(graph->nodes[0][c]->type == 'E')
           return true;
-        if(graph->nodes[0][c]->type != 'S' && graph->nodes[0][c]->type != 'V')
+        if(graph->nodes[0][c]->type != 'S' && graph->nodes[0][c]->type != 'V'){
           graph->nodes[0][c]->type = 'V';
+        //  visualize_graph(graph);
+        }
       }
     }
     else if(count%2==1){ //traverse down
@@ -256,8 +258,10 @@ bool dfs_helper(graph_t* graph, int rows, int cols, int start_col, int tid){
         if(graph->nodes[r][curr_col]->type == 'E'){
           return true;
         }
-        if(graph->nodes[r][curr_col]->type != 'E' && graph->nodes[r][curr_col]->type != 'V')
+        if(graph->nodes[r][curr_col]->type != 'E' && graph->nodes[r][curr_col]->type != 'V'){
           graph->nodes[r][curr_col]->type = 'V';
+     //     visualize_graph(graph);
+        }
       }
       curr_col--;
     }
@@ -267,8 +271,10 @@ bool dfs_helper(graph_t* graph, int rows, int cols, int start_col, int tid){
         if(graph->nodes[r][curr_col]->type == 'E'){
           return true;
         }
-        if(graph->nodes[r][curr_col]->type != 'E' && graph->nodes[r][curr_col]->type != 'V')
+        if(graph->nodes[r][curr_col]->type != 'E' && graph->nodes[r][curr_col]->type != 'V'){
           graph->nodes[r][curr_col]->type = 'V';
+   //       visualize_graph(graph);
+        }
       }
       curr_col--;
     }
@@ -277,12 +283,12 @@ bool dfs_helper(graph_t* graph, int rows, int cols, int start_col, int tid){
 }
 
 bool parallel_dfs(graph_t *graph, int rows, int cols){
-  int num_threads = 2;
+  int num_threads = 8;
   char found = 0;
   int cols_per_thread = cols/num_threads;
   int rem = cols%num_threads;
   while(found == 0){
-    printf("found %d\n", found);
+    //printf("found %d\n", found);
     #if OMP
     #pragma omp parallel num_threads(num_threads)
     {
@@ -301,8 +307,7 @@ bool parallel_dfs(graph_t *graph, int rows, int cols){
   return false;
 }
 
-
-/*
+*/
 bool parallel_dfs(graph_t* graph, int rows, int cols){
   //nature of dfs tells us the max number of traversals will be col+1
   //traverse graph vertically at most col times+1 for the first horizontal traversal
@@ -387,4 +392,3 @@ bool parallel_dfs(graph_t* graph, int rows, int cols){
 }
   return false;
 }
-*/
