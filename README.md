@@ -9,5 +9,12 @@ Steps to run:
 
 Overview of Some of the Results:
 
+Sequential A* visualisation
+<img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%203.13.20%20PM.png" width="250" height="250">
+
 Parallel A*, 7x speedup (over sequential A*) for 10^6 nodes and 137x speedup (over sequential A*) for 10^8 nodes 
 <img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%201.39.55%20PM.png" width="250" height="250">
+
+
+
+
