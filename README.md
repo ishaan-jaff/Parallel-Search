@@ -7,4 +7,4 @@ Steps to run:
 - make all on command line 
 - ./output to view the results 
 
-
+![Test Image 1](/visualisation_code/Screen Shot 2020-05-01 at 1.39.55 PM.png)
