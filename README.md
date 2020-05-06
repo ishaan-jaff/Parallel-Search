@@ -7,29 +7,29 @@ Steps to run:
 - make all on command line 
 - ./output to view the results 
 
-**Overview of Some of the Results:**
+##**Overview of Some of the Results:**
 Run on Eight-core, 3.0 GHz Intel Core i7 processor<br/>
-**Sequential A* visualisation**
+##**Sequential A* visualisation**
 
 
 
 <img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%203.13.20%20PM.png" width="250" height="250">
 
-**Parallel A*, 7x speedup (over sequential A*) for 10^6 nodes and 137x speedup (over sequential A*) for 10^8 nodes**
+##**Parallel A*, 7x speedup (over sequential A*) for 10^6 nodes and 137x speedup (over sequential A*) for 10^8 nodes**
 <img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%201.39.55%20PM.png" width="250" height="250">
 <br/>
 
 
 
 
-**Sequential Breadth First Search**
+##**Sequential Breadth First Search**
 
 
 
 
 <img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%202.57.19%20PM.png" width="250" height="250">
 <br/>
-**Parallel Breadth First Search (all speedups compared to sequential version), 2.7x speedup for 10^8 nodes, 3x speedup for 10^7 nodes, 1.3x speedup for 10^6 nodes**
+##**Parallel Breadth First Search (all speedups compared to sequential version), 2.7x speedup for 10^8 nodes, 3x speedup for 10^7 nodes, 1.3x speedup for 10^6 nodes**
 
 
 
