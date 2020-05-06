@@ -27,7 +27,7 @@ Run on Eight-core, 3.0 GHz Intel Core i7 processor<br/>
 
 
 
-<img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%202.57.19%20PM.png" width="250" height="250">
+<img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%203.07.21%20PM.png" width="250" height="250">
 <br/>
 
 
