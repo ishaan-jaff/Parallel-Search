@@ -22,7 +22,7 @@ Run on Eight-core, 3.0 GHz Intel Core i7 processor<br/>
 
 
 
-##**Sequential Breadth First Search
+## Sequential Breadth First Search
 
 
 
