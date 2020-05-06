@@ -8,3 +8,5 @@ Steps to run:
 - ./output to view the results 
 
 ![Test Image 1](https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%201.39.55%20PM.png) {:height="50%" width="50%"}
+
+<img src="https://cloud.githubusercontent.com/assets/yourgif.gif" width="400" height="790">
