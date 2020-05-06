@@ -11,19 +11,13 @@ Steps to run:
 Run on Eight-core, 3.0 GHz Intel Core i7 processor<br/>
 
 
-### Sequential A* visualisation
-
-<style>
-.padding-table-columns td
-{
-    padding:0 5px 0 0; /* Only right padding*/
-}
-  </style>
+## A* visualisation
+### Parallel A* had 7x speedup (over sequential A*) for 10^6 nodes and 137x speedup (over sequential A*) for 10^8 nodes
 
 <table className="padding-table-columns">
   <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
+    <td>Sequential Version</td>
+     <td>Parallel Version, 8 threads</td>
   </tr>
   <tr>
     <td><img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%203.13.20%20PM.png" width="250" height="250"></td>
@@ -32,11 +26,6 @@ Run on Eight-core, 3.0 GHz Intel Core i7 processor<br/>
  </table>
 
 
-
-
-### Parallel A*, 7x speedup (over sequential A*) for 10^6 nodes and 137x speedup (over sequential A*) for 10^8 nodes
-<img src="https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%201.39.55%20PM.png" width="250" height="250">
-<br/>
 
 
 
