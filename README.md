@@ -11,7 +11,7 @@ Steps to run:
 Run on Eight-core, 3.0 GHz Intel Core i7 processor<br/>
 
 
-## A* visualisation
+## A* 
 ### Parallel A* had 7x speedup (over sequential A*) for 10^6 nodes and 137x speedup (over sequential A*) for 10^8 nodes
 
 <table className="padding-table-columns">
