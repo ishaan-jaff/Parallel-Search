@@ -7,4 +7,4 @@ Steps to run:
 - make all on command line 
 - ./output to view the results 
 
-![Test Image 1](https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%201.39.55%20PM.png)
+![Test Image 1](https://github.com/ishaan-jaff/Parallel-Search/blob/master/visualisation_code/Screen%20Shot%202020-05-01%20at%201.39.55%20PM.png =250x250)
